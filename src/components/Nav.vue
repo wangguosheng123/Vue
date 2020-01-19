@@ -8,9 +8,10 @@
       <li><img src="http://i4.vanclimg.com/cms/20160923/logo18546.png" /></li>
       <router-link
         tag="li"
-        v-for="nav in navs"
+        v-for="(nav, index) in navs"
         :to="{ name: nav.name }"
         activeClass="active"
+        :key="index"
       >
         {{ nav.text }}
       </router-link>
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-  name: "Nav",
+  name: 'Nav',
   // 这是动态的数据模型，也是要注入到上面引入的html的样式中间去，这故意使用js和模版样式分离，这里最后导入到入口文件Entry中去了
   data() {
     return {
@@ -29,16 +30,16 @@ export default {
         // {text:"首页",name:"h"},
         // {text:"商品列表",name:"g"},
         // {text:"购物车",name:"sc"}
-        { text: "首页", name: "h" },
-        { text: "衬衣", name: "g" },
-        { text: "卫衣", name: "g" },
-        { text: "羽绒服", name: "g" },
-        { text: "外套", name: "g" },
-        { text: "针织衫", name: "g" },
-        { text: "裤装", name: "g" },
-        { text: "鞋", name: "g" },
-        { text: "家具配饰", name: "g" },
-        { text: "内衣袜品", name: "g" }
+        { text: '首页', name: 'h' },
+        { text: '衬衣', name: 'g' },
+        { text: '卫衣', name: 'g' },
+        { text: '羽绒服', name: 'g' },
+        { text: '外套', name: 'g' },
+        { text: '针织衫', name: 'g' },
+        { text: '裤装', name: 'g' },
+        { text: '鞋', name: 'g' },
+        { text: '家具配饰', name: 'g' },
+        { text: '内衣袜品', name: 'g' }
       ]
     };
   }

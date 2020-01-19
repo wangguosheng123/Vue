@@ -36,7 +36,7 @@
     <div class="carfoot">
       <span>合计：{{ zongcount | cny }}</span>
       <span>数量总结：{{ count }}件</span>
-      <button @click="quliebiao">&lt;&lt;继续购物</button>
+      <Button @click="quliebiao">&lt;&lt;继续购物</Button>
     </div>
 
     <!-- 这是地址的 -->
@@ -72,11 +72,11 @@
 </template>
 
 <script>
-import axios from "axios"; // 消息请求
+import axios from 'axios'; // 消息请求
 export default {
-  name: "ShopCar",
+  name: 'ShopCar',
   data() {
-    let userid = localStorage.getItem("token");
+    let userid = localStorage.getItem('token');
     let userids = localStorage.getItem(userid);
     let list = JSON.parse(userids);
     list.map(car => {
@@ -87,24 +87,24 @@ export default {
       list,
       sheng_list: [
         {
-          city_id: "CH20",
-          name: "湖北",
-          en: ""
+          city_id: 'CH20',
+          name: '湖北',
+          en: ''
         }
       ],
 
       shiList: [
         {
-          city_id: "CH2001",
-          name: "武汉",
-          en: ""
+          city_id: 'CH2001',
+          name: '武汉',
+          en: ''
         }
       ],
       quList: [
         {
-          city_id: "CH200106",
-          name: "东西湖",
-          en: "dongxihu"
+          city_id: 'CH200106',
+          name: '东西湖',
+          en: 'dongxihu'
         }
       ],
       newsheng_select_id: null,
@@ -163,35 +163,35 @@ export default {
 
     removed(i) {
       console.log(i);
-      let userid = localStorage.getItem("token");
+      let userid = localStorage.getItem('token');
       this.list.splice(i, i + 1);
       localStorage.setItem(userid, JSON.stringify(this.list));
     },
 
     quliebiao() {
-      window.location.href = "./#/goods";
+      window.location.href = './#/goods';
     },
     shengbian() {
       console.log(66666);
-      var newsheng_select_id = document.getElementById("sheng").value; ////得到现在下拉框里面省份的id,因为id是唯一的
+      var newsheng_select_id = document.getElementById('sheng').value; ////得到现在下拉框里面省份的id,因为id是唯一的
       var sheng_info = this.sheng_list.filter(function(shengfen) {
         ///此处里面的shengfen是从sheng_list取出来的每一省份
         return shengfen.city_id == newsheng_select_id; ///因为shengfen是一个小的对象，所以点出里面的id,
       })[0]; ///因为得到的是一个集合，所以取小标0， 最后就得到了下拉框里省份的小集合
       console.log(sheng_info);
-      var shi_list = sheng_info["list"]; ///此处就得到了下拉框里面省份下面城市的集合
+      var shi_list = sheng_info['list']; ///此处就得到了下拉框里面省份下面城市的集合
       // console.log(shi_list)
       this.shiList = shi_list;
     },
     shibian() {
-      var newshi_select_id = document.getElementById("shi").value;
+      var newshi_select_id = document.getElementById('shi').value;
       // console.log(newshi_select_id)
-      var newsheng_select_id = document.getElementById("sheng").value; ////得到现在下拉框里面省份的id,因为id是唯一的
+      var newsheng_select_id = document.getElementById('sheng').value; ////得到现在下拉框里面省份的id,因为id是唯一的
       var sheng_info = this.sheng_list.filter(function(shengfen) {
         ///此处里面的shengfen是从sheng_list取出来的每一省份
         return shengfen.city_id == newsheng_select_id; ///因为shengfen是一个小的对象，所以点出里面的id,
       })[0]; ///因为得到的是一个集合，所以取小标0， 最后就得到了下拉框里省份的小集合
-      var shi_list = sheng_info["list"]; ///此处就得到了下拉框里面省份下面城市的集合
+      var shi_list = sheng_info['list']; ///此处就得到了下拉框里面省份下面城市的集合
       // console.log(shi_list)
 
       var shi_info = shi_list.filter(function(chengshi) {
@@ -199,8 +199,8 @@ export default {
       })[0];
       console.log(66666);
 
-      var qu_list = shi_info["list"];
-      if (shi_info["list"]) {
+      var qu_list = shi_info['list'];
+      if (shi_info['list']) {
         ////看有没有list，没有就是说明是直辖市
         this.quList = qu_list;
       } else {
@@ -209,7 +209,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("citylist/id/2").then(({ data }) => {
+    axios.get('citylist/id/2').then(({ data }) => {
       //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
       // console.log(data.list)
       this.sheng_list = data.list;
@@ -303,6 +303,8 @@ h1 {
         button {
           width: 20px;
           height: 20px;
+          text-align: center;
+          line-height: 20px;
         }
         input {
           width: 30px;
@@ -322,8 +324,8 @@ h1 {
   overflow: hidden;
   button {
     margin-top: 5px;
-    width: 80px;
-    height: 20px;
+    width: 100px;
+    height: 30px;
     float: right;
   }
   button:hover {

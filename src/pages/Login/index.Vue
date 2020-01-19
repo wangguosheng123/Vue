@@ -19,11 +19,21 @@
           <span id="putong">普通登录</span>
           <div id="guding">
             <div id="left">
-              <input type="text" placeholder="请输入用户名" id="username" />
-              <input type="text" placeholder="请输入密码" id="userpwd" />
+              <Input
+                type="text"
+                class="input"
+                placeholder="请输入用户名"
+                id="username"
+              />
+              <Input
+                type="text"
+                class="input"
+                placeholder="请输入密码"
+                id="userpwd"
+              />
             </div>
           </div>
-          <button id="btn" @click="denglv">登录</button>
+          <Button type="primary" id="btn" @click="denglv">登录</Button>
           <div id="hezuo">
             <p>使用合作网站登录</p>
             <ul>
@@ -142,14 +152,12 @@ export default {
 #putong {
   display: inline-block;
   width: 210px;
-  height: 20px;
-  border: 1px solid #000;
+  height: 24px;
+  // border: 1px solid #000;
   text-align: center;
-  line-height: 20px;
-}
-
-#putong {
-  background-color: red;
+  line-height: 24px;
+  background-color: #2d8cf0;
+  color: #fff;
 }
 
 #guding {
@@ -162,10 +170,12 @@ export default {
   overflow: hidden;
 }
 
-#left input {
-  margin: 20px;
-  width: 380px;
-  height: 45px;
+#left {
+  .input {
+    margin: 20px;
+    width: 380px;
+    height: 45px;
+  }
 }
 
 /* 、、、、、普通登录完成 */
@@ -181,7 +191,7 @@ export default {
   margin: 20px;
   width: 380px;
   height: 45px;
-  background-color: red;
+  // background-color: red;
   color: #fff;
   text-align: center;
   line-height: 45px;

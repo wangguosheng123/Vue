@@ -10,7 +10,6 @@
           <div id="content">
             <img :src="goods.src" id="smallImg" />
           </div>
-
           <div id="fdzhinan">
             <ul>
               <li>商品名称：{{ goods.goodsname }}</li>
@@ -46,12 +45,12 @@
                 XXL<input type="radio" name="rc" />
               </li>
               <li>
-                <button id="mai" @click="lijimai(goods.goodsID)">
+                <Button id="mai" @click="lijimai(goods.goodsID)">
                   立即购买
-                </button>
-                <button id="che" @click="jiarucar(goods.goodsID)">
+                </Button>
+                <Button id="che" @click="jiarucar(goods.goodsID)">
                   加入购物车
-                </button>
+                </Button>
               </li>
               <li>
                 <p id="wenxing">温馨提示</p>
@@ -68,9 +67,9 @@
 </template>
 
 <script>
-import Foot from "../../components/Foot";
+import Foot from '../../components/Foot';
 export default {
-  name: "Detail",
+  name: 'Detail',
   components: { Foot },
   data() {
     return {
@@ -80,7 +79,7 @@ export default {
 
   methods: {
     jiarucar(goodid) {
-      this.$http.get("./api/liebiao").then(({ data }) => {
+      this.$http.get('./api/liebiao').then(({ data }) => {
         //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
         let shu = data.data.list;
         //   console.log(shu)
@@ -88,7 +87,7 @@ export default {
         let flag = true;
         let goods1 = null;
         let list = [];
-        let userid = localStorage.getItem("token");
+        let userid = localStorage.getItem('token');
         if (userid != null) {
           let userids = localStorage.getItem(userid);
           userids = JSON.parse(userids);
@@ -124,17 +123,17 @@ export default {
             list.push(goods1);
           }
           localStorage.setItem(userid, JSON.stringify(list));
-          if (confirm("加入成功 是否进入购物车结算")) {
-            window.location.href = "./#/shopCar";
+          if (confirm('加入成功 是否进入购物车结算')) {
+            window.location.href = './#/shopCar';
           }
         } else {
-          alert("您目前还没有登录，即将前往登录页面");
-          window.location.href = "./#/login";
+          alert('您目前还没有登录，即将前往登录页面');
+          window.location.href = './#/login';
         }
       });
     },
     lijimai(goodid) {
-      this.$http.get("./api/liebiao").then(({ data }) => {
+      this.$http.get('./api/liebiao').then(({ data }) => {
         //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
         let shu = data.data.list;
         //   console.log(shu)
@@ -142,7 +141,7 @@ export default {
         let flag = true;
         let goods1 = null;
         let list = [];
-        let userid = localStorage.getItem("token");
+        let userid = localStorage.getItem('token');
         if (userid != null) {
           let userids = localStorage.getItem(userid);
           userids = JSON.parse(userids);
@@ -178,17 +177,17 @@ export default {
             list.push(goods1);
           }
           localStorage.setItem(userid, JSON.stringify(list));
-          alert("加入成功 即将进入购物车结算页面");
-          window.location.href = "./#/shopCar";
+          alert('加入成功 即将进入购物车结算页面');
+          window.location.href = './#/shopCar';
         } else {
-          alert("您目前还没有登录，即将前往登录页面");
-          window.location.href = "./#/login";
+          alert('您目前还没有登录，即将前往登录页面');
+          window.location.href = './#/login';
         }
       });
     }
   },
   mounted() {
-    this.$http.get("./api/liebiao").then(({ data }) => {
+    this.$http.get('./api/liebiao').then(({ data }) => {
       let goodsdata = data.data.list;
       console.log(goodsdata);
       let { goodsid: goodsID } = this.$route.params;

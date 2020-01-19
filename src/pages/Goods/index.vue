@@ -18,13 +18,18 @@
         value="desc"
         @click="jiangxu"
       />商品价格降序
-
-      <input type="text" id="search" v-model="val" /><button
-        @click="sosuo(val)"
-        id="btn1"
-      >
+      <Input
+        v-model="val"
+        id="search"
+        placeholder="请输入商品"
+        clearable
+        style="width: 200px"
+        size="small"
+      />
+      <!-- <input type="text" id="search" v-model="val" /> -->
+      <Button @click="sosuo(val)" id="btn1">
         搜索
-      </button>
+      </Button>
     </div>
     <div id="lbxian"></div>
     <ul id="lbshangping" class="cl">
@@ -37,7 +42,7 @@
         ></router-link>
         <p>商品名：{{ goods.goodsname }}</p>
         <p>原价:{{ goods.price | cny }}</p>
-        <button @click="jiaru(goods.goodsID)">加入购物车</button>
+        <Button @click="jiaru(goods.goodsID)">加入购物车</Button>
         <div id="lbding">
           <img :src="goods.src" />
           <dl>
@@ -52,9 +57,7 @@
     </ul>
 
     <div class="pager">
-      <!-- <a href="javascript:;" @click="shang(i)"  class="pager-btn prev">上一页</a> -->
       <div class="btn-list">
-        <!-- :class="{active:active>=1}" -->
         <a
           href="javascript:;"
           v-for="(car, i) in pageList"
@@ -64,16 +67,15 @@
           >{{ car }}</a
         >
       </div>
-      <!-- <a href="javascript:;" @click="next(i)" class="pager-btn next">下一页</a> -->
     </div>
     <Foot />
   </div>
 </template>
 
 <script>
-import Foot from "../../components/Foot";
+import Foot from '../../components/Foot';
 export default {
-  name: "Goods",
+  name: 'Goods',
   components: { Foot },
   data() {
     return {
@@ -86,7 +88,7 @@ export default {
   },
   mounted() {
     //首页组件加载完毕后开始请求轮播图数据，去请求热门商品列表
-    this.$http.get("./api/goods").then(({ data }) => {
+    this.$http.get('./api/goods').then(({ data }) => {
       //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
       let num = data.data.list.length;
       console.log(num);
@@ -103,7 +105,7 @@ export default {
   methods: {
     jiaru(goodid) {
       // alert(goodid)
-      this.$http.get("./api/liebiao").then(({ data }) => {
+      this.$http.get('./api/liebiao').then(({ data }) => {
         //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
         let shu = data.data.list;
         //   console.log(shu)
@@ -111,7 +113,7 @@ export default {
         let flag = true;
         let goods1 = null;
         let list = [];
-        let userid = localStorage.getItem("token");
+        let userid = localStorage.getItem('token');
         if (userid != null) {
           let userids = localStorage.getItem(userid);
           userids = JSON.parse(userids);
@@ -127,7 +129,7 @@ export default {
             // console.log(goods1)
             list.push(goods1);
             localStorage.setItem(userid, JSON.stringify(list));
-            alert("加入购物车成功");
+            alert('加入购物车成功');
           } else {
             //如果之前存过值 则将原来的值取出来 转换成数组
             //再加入新的值
@@ -149,12 +151,12 @@ export default {
             list.push(goods1);
           }
           localStorage.setItem(userid, JSON.stringify(list));
-          if (confirm("加入成功 是否进入购物车结算")) {
-            window.location.href = "./#/shopCar";
+          if (confirm('加入成功 是否进入购物车结算')) {
+            window.location.href = './#/shopCar';
           }
         } else {
-          alert("您目前还没有登录，即将前往登录页面");
-          window.location.href = "./#/login";
+          alert('您目前还没有登录，即将前往登录页面');
+          window.location.href = './#/login';
         }
       });
     },
@@ -163,7 +165,7 @@ export default {
       this.index = i * 10;
       this.skip = (i + 1) * 10;
       //    console.log(skip)
-      this.$http.get("./api/goods").then(({ data }) => {
+      this.$http.get('./api/goods').then(({ data }) => {
         //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
 
         this.goodsList = data.data.list.slice(this.index, this.skip);
@@ -171,9 +173,9 @@ export default {
     },
     sosuo(val) {
       console.log(val);
-      console.log("空的");
-      if (val != "") {
-        this.$http.get("./api/goods").then(({ data }) => {
+      console.log('空的');
+      if (val != '') {
+        this.$http.get('./api/goods').then(({ data }) => {
           //拿到数据后将数据赋给当前组件的数据模型 进而传给banner组件，这里的this就是data里面的内容，这就是箭头函数的好处
           //    let solist= data.list.filter(item=>{
           //         return  this.goodsList=item.newprice==val
@@ -184,7 +186,7 @@ export default {
           for (var i = 0; i < solist.length; i++) {
             let item = solist[i];
             let itemname = item.goodsname;
-            let itemnewprice = item.newprice + ""; ////一定要记得数字类型没有这个方法
+            let itemnewprice = item.newprice + ''; ////一定要记得数字类型没有这个方法
             //   console.log( typeof itemnewprice)
             if (
               itemname.indexOf(val) != -1 ||
@@ -195,8 +197,8 @@ export default {
             }
           }
           if (newlist.length == 0) {
-            alert("小主，抱歉没有找到您要的宝贝,去首页看看");
-            window.location.href = "./#/home";
+            alert('小主，抱歉没有找到您要的宝贝,去首页看看');
+            window.location.href = './#/home';
           }
           if (newlist.length >= 10) {
             isPage((i = 0));
@@ -208,7 +210,7 @@ export default {
       }
     },
     shengxu() {
-      this.$http.get("./api/goods").then(({ data }) => {
+      this.$http.get('./api/goods').then(({ data }) => {
         let shenglist = data.data.list;
 
         for (var i = 0; i < shenglist.length; i++) {
@@ -228,7 +230,7 @@ export default {
       });
     },
     jiangxu() {
-      this.$http.get("./api/goods").then(({ data }) => {
+      this.$http.get('./api/goods').then(({ data }) => {
         let shenglist = data.data.list;
 
         for (var i = 0; i < shenglist.length; i++) {
@@ -284,11 +286,13 @@ export default {
 #lbxu #search {
   width: 200px;
   height: 20px;
+  margin-bottom: 7px;
 }
 #btn1 {
   height: 25px;
   width: 80px;
   margin-right: 150px;
+  margin-bottom: 4px;
 }
 #lbxu img {
   width: 16px;
@@ -330,7 +334,7 @@ export default {
 #lbshangping button {
   width: 80px;
   height: 30px;
-  margin-left: 60px;
+  // margin-left: 60px;
   background-color: #a98f83;
 }
 #lbshangping button:hover {
@@ -378,7 +382,7 @@ export default {
 /* ////////商品列表生成完成 */
 
 // 这是分页的样式
-@w: 20px;
+@w: 30px;
 .pager {
   text-align: center;
   margin: 40px 0;
@@ -399,7 +403,7 @@ export default {
     margin: 0 6px;
     &.active,
     &:hover {
-      background: rgb(122, 123, 126);
+      background: #2d8cf0;
       color: #fff;
     }
     &:hover {

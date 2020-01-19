@@ -16,16 +16,16 @@
           ></span
         >
         <div id="inp">
-          <input
+          <Input
             class="zu1"
             type="text"
             name=""
             id="zu1"
             placeholder="请输入验证码"
-          /><button @click="yzmshow" class="zu2" id="zu2">{{ nums }}</button
+          /><Button @click="yzmshow" class="zu2" id="zu2">{{ nums }}</Button
           ><br />
           <p id="ms0" v-model="ms0">{{ ms0 }}</p>
-          <input
+          <Input
             class="zu4"
             type="text"
             name=""
@@ -33,14 +33,14 @@
             placeholder="请输入由数字字母_$组成长度4到12位不能以数字开头用户名"
           /><br />
           <p id="ms1" v-model="ms1">{{ ms1 }}</p>
-          <input
+          <Input
             class="zu5"
             type="text"
             name=""
             id="zu5"
             placeholder="请设置4-10位含数字，字母的密码"
           /><br />
-          <input
+          <Input
             class="zu6"
             type="text"
             name=""
@@ -48,7 +48,7 @@
             placeholder="请再次输入密码"
           /><b />
           <p id="ms2" v-model="ms2">{{ ms2 }}</p>
-          <button id="btn" @click="zhuceyz">立即注册</button>
+          <Button type="primary" id="btn" @click="zhuceyz">立即注册</Button>
         </div>
       </li>
     </ul>
@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import Foot from "../../components/Foot";
+import Foot from '../../components/Foot';
 export default {
-  name: "Zhuce",
+  name: 'Zhuce',
   components: { Foot },
   data() {
     return {
@@ -76,7 +76,7 @@ export default {
       let that = this;
       shownum();
       function shownum() {
-        var num = "";
+        var num = '';
         for (var i = 0; i < 6; i++) {
           var index = Math.floor(Math.random() * str.length);
           num += str[index];
@@ -91,42 +91,42 @@ export default {
       let count_m = 0;
       let count_name = 0;
 
-      let zu1 = document.getElementById("zu1").value;
+      let zu1 = document.getElementById('zu1').value;
       // console.log(zu1)
-      let zu2 = document.getElementById("zu2").innerHTML;
+      let zu2 = document.getElementById('zu2').innerHTML;
       // console.log(zu2)
 
       if (zu1 == zu2) {
         count_y = 1;
-        this.ms0 = "";
+        this.ms0 = '';
       } else {
         count_y = 0;
-        this.ms0 = "验证码不正确";
+        this.ms0 = '验证码不正确';
       }
-      var username = document.getElementById("username").value;
+      var username = document.getElementById('username').value;
       var usernamereg = /^[A-Za-z_$][A-Za-z0-9_$]{3,11}$/gi;
       if (usernamereg.test(username)) {
         count_name = 1;
-        this.ms1 = "";
+        this.ms1 = '';
       } else {
-        this.ms1 = "用户名输入不合法";
+        this.ms1 = '用户名输入不合法';
         count_name = 0;
       }
 
-      var userpwd = document.getElementById("userpwd").value;
+      var userpwd = document.getElementById('userpwd').value;
       var userpwdreg = /[0-9A-Za-z]{4,10}$/gi;
-      let zu5 = document.getElementById("zu5").value;
+      let zu5 = document.getElementById('zu5').value;
 
       if (zu5 == userpwd) {
         if (userpwdreg.test(userpwd)) {
           count_m = 1;
-          this.ms2 = "";
+          this.ms2 = '';
         } else {
-          this.ms2 = "密码输入不合法";
+          this.ms2 = '密码输入不合法';
           count_m = 0;
         }
       } else {
-        this.ms2 = "密码两次不一致";
+        this.ms2 = '密码两次不一致';
         count_m = 0;
       }
       // console.log(count_y,)
@@ -137,16 +137,16 @@ export default {
           pwd: userpwd
         };
         let list = [];
-        let users = localStorage.getItem("users");
+        let users = localStorage.getItem('users');
         let flag = false;
 
         //判断该购物车列表之前有没有存过数据
         if (users == null) {
           //如果没有存 则直接添加新值
           list.push(user);
-          localStorage.setItem("users", JSON.stringify(list));
-          alert("恭喜您，注册成功");
-          window.location.href = "./#/login";
+          localStorage.setItem('users', JSON.stringify(list));
+          alert('恭喜您，注册成功');
+          window.location.href = './#/login';
         } else {
           //如果之前存过值 则将原来的值取出来 转换成数组
           users = JSON.parse(users);
@@ -155,8 +155,8 @@ export default {
             let name = users[i].name;
             if (name == username) {
               flag = true;
-              alert("您已经注册过了，即将前往登录页面");
-              window.location.href = "./#/login";
+              alert('您已经注册过了，即将前往登录页面');
+              window.location.href = './#/login';
             } else {
               flag = false;
             }
@@ -165,9 +165,9 @@ export default {
             users.push(user);
             //再把加了新值的数组重新丢回到本地存储内
             list = users;
-            localStorage.setItem("users", JSON.stringify(list));
-            alert("恭喜您，注册成功");
-            window.location.href = "./#/login";
+            localStorage.setItem('users', JSON.stringify(list));
+            alert('恭喜您，注册成功');
+            window.location.href = './#/login';
           }
         }
       }
@@ -223,14 +223,14 @@ export default {
 }
 #inp .zu1 {
   margin: 10px;
-  width: 260px;
-  height: 45px;
+  width: 230px;
+  // height: 45px;
 }
 #inp .zu2,
 .zu3 {
-  margin: 10px;
-  width: 100px;
-  height: 45px;
+  // margin: 10px;
+  width: 80px;
+  // height: 45px;
 }
 #inp .zu4,
 .zu5,

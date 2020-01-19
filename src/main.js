@@ -1,22 +1,29 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from "vue";
-import App from "./App";
-import router from "./router";
-import "./tool/filter";
+import Vue from 'vue';
+import App from './App';
+import router from './router';
+import './tool/filter';
 
-import axios from "axios"; // 消息请求
+import axios from 'axios'; // 消息请求
 Vue.prototype.$http = axios; // 将axios挂载到Vue实例中的$http 上面
 
 Vue.config.productionTip = false;
 
-import VueAwesomeSwiper from "vue-awesome-swiper";
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 // require styles
-import "swiper/dist/css/swiper.css";
+import 'swiper/dist/css/swiper.css';
+
+import { Button, Input } from 'view-design';
+Vue.component('Button', Button);
+Vue.component('Input', Input);
+
+import 'view-design/dist/styles/iview.css';
+
 Vue.use(VueAwesomeSwiper /* { default global options } */);
 new Vue({
-  el: "#app",
+  el: '#app',
   router,
   components: { App },
-  template: "<App/>"
+  template: '<App/>'
 });
